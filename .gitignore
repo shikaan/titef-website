@@ -1,0 +1,7 @@
+.idea
+node_modules
+
+theme/*/node_modules
+
+**/*/css/_style.css
+**/*/css/style.css

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+
+{{ partial "head" . }}
+
+<body>
+    {{ partial "nav" . }}
+
+    <div class="container">
+        <main class="grid">
+            <aside class="side-column side-column--show-sm">
+                {{ partial "aside" . }}
+            </aside>
+            <section class="main-column">
+                <header class="item-title">
+                    {{ .Title }}
+                </header>
+                <article>
+                        {{ .Content }}
+                </article>
+            </section>
+            <aside class="side-column">
+                {{ partial "toc" . }}
+            </aside>
+        </main>
+    </div>
+
+    {{ partial "footer" . }}
+</body>
+
+</html>

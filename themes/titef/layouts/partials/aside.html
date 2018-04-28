@@ -1,0 +1,20 @@
+{{ $sectionPages := where .Site.Pages "Section" .Section }}
+
+<div class="navigator">
+    {{ if ge (len $sectionPages) 1 }}
+    <header class="navigator__header">
+        <h2>{{ .Section }}</h2>
+    </header>
+    <section>
+        <ul class="navigator__list">
+            {{ range $sectionPages }}
+            <li class="navigator__list-item {{ if gt .Weight 1 }} navigator__list-item--indent {{ end }}">
+                <a href="{{ .URL }}" title="{{ .Title }}">
+                    {{ .Title }}
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+    </section>
+    {{ end }}
+</div>

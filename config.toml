@@ -1,0 +1,51 @@
+baseURL = "http://example.com/"
+languageCode = "en"
+title = "titef"
+theme = "titef"
+googleAnalytics = ""
+
+[params]
+    locale = "en_US"
+    author = "Manuel Spagnolo"
+    description = "tiny test framework"
+    githubUsername = "shikaan"
+    email = "spagnolo.manu@gmail.com"
+    highlight = true
+    highlightStyle = "github"
+    highlightLanguages = ["javascript"]
+	profilePic = "./images/logo.png"
+	favicon = "./images/favicon.ico"
+
+[[menu.main]]
+    url = "/"
+    name = "Home"
+    weight = 1
+
+[[menu.main]]
+    url = "/recipes/"
+    name = "Recipes"
+    weight = 2
+
+[[menu.main]]
+    url = "/api/"
+    name = "API Docs"
+    weight = 3
+
+# Social icons to be shown on the right-hand side of the navigation bar
+# The "name" field should match the name of the icon to be used
+# The list of available icons can be found at http://fontawesome.io/icons/
+
+[[menu.icon]]
+    url = "mailto:spagnolo.manu@gmail.com"
+    name = "envelope"
+    weight = 1
+
+[[menu.icon]]
+    url = "https://github.com/shikaan/"
+    name = "github"
+    weight = 2
+
+[[menu.icon]]
+    url = "https://www.stackoverflow.com/users/5897505/phugo"
+    name = "stack-overflow"
+    weight = 3

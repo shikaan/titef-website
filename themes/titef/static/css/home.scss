@@ -1,0 +1,64 @@
+@import "variables";
+
+$title-size: $size-10;
+$description-size: $size-8;
+$gutter-size: $size-2;
+
+$logo-width: 393px;
+$logo-height: 454px;
+
+.intro {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .intro__row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+
+    .intro__profile {
+      width: $logo-width / 2;
+      height: $logo-height / 2;
+      border-radius: 0;
+      margin: $gutter-size auto;
+    }
+
+    .intro__text {
+      display: flex;
+      flex-direction: column;
+
+      .intro__title {
+        color: $dark;
+        font-size: $title-size;
+        font-family: $heading-font-family;
+        line-height: $description-size;
+        margin: 0;
+      }
+
+      .intro__description {
+        font-family: $base-font-family;
+        color: $gray-300;
+        font-size: $description-size;
+        font-weight: 100;
+        margin: 0;
+        padding: 0 $size-1;
+      }
+    }
+  }
+
+}
+
+@media (min-width: map-get($grid-breakpoints, 'sm')) {
+  .intro {
+    .intro__row {
+      margin: $gutter-size;
+      width: unset;
+
+      .intro__text {
+        align-items: flex-start;
+      }
+    }
+  }
+}

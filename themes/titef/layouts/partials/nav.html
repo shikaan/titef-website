@@ -1,0 +1,66 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+
+    <div class="container">
+        <div class="navbar-header">
+
+            <div class="navbar-brand">
+                {{ with .Site.Params.profilePic }}
+                <img src="{{ . | absURL }}" alt="Logo">
+                {{ end }}
+                <span>
+                    {{ .Title }}
+                </span>
+            </div>
+
+            <button class="navbar-toggle" data-target=".navbar-collapse.menu" data-toggle="collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+        <div class="collapse navbar-collapse menu">
+
+            {{ if .Site.Menus.main }}
+            <ul class="nav navbar-nav">
+                {{ range sort .Site.Menus.main }}
+                <li>
+                    <a href="{{ .URL }}">{{ .Name }}</a>
+                </li>
+                {{ end }}
+            </ul>
+            {{ end }} {{ if .Site.Menus.icon }}
+            <ul class="nav navbar-nav navbar-right">
+                {{ range sort .Site.Menus.icon }}
+                <li class="navbar-icon">
+                    <a href="{{ .URL }}">
+                        <i class="fa fa-{{ .Name }}"></i>
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+            {{ end }}
+
+        </div>
+    </div>
+    <div class="container visible-xs">
+        <div class="navbar-header sections-navbar" data-target=".navbar-collapse.sections" data-toggle="collapse">
+            Sections
+        </div>
+
+        <div class="collapse navbar-collapse sections">
+            {{ $sectionPages := where .Site.Pages "Section" .Section }}
+
+            <ul class="nav navbar-nav">
+                {{ range $sectionPages }}
+                <li>
+                    <a href="{{ .URL }}" title="{{ .Title }}">
+                        {{ .Title }}
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+
+</nav>
