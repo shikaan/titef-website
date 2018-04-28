@@ -43,6 +43,8 @@
 
         </div>
     </div>
+
+    {{ if ne .IsHome true }}
     <div class="container visible-xs">
         <div class="navbar-header sections-navbar" data-target=".navbar-collapse.sections" data-toggle="collapse">
             Sections
@@ -62,5 +64,6 @@
             </ul>
         </div>
     </div>
+    {{ end }}
 
 </nav>
