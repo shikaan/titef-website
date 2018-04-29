@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <meta property="description" content="{{ humanize .Site.Params.Description }}" />
-    <meta property="og:title" content="Titef - {{ .Title }}" />
+    <meta property="og:title" content="{{ humanize .Site.Title }} - {{ .Title }}" />
     <meta property="og:description" content="{{ humanize .Site.Params.Description }}" />
     <meta property="og:image" content="{{ .Site.Params.profilePic | absURL }}" />
     <meta property="og:type" content="website" />
@@ -13,7 +13,12 @@
 
     <link rel="alternate" hreflang="x-default" href="{{ .URL | absURL }}" />
 
-    <title>Titef - {{ .Title }}</title>
+    {{ if .IsHome }}
+    <title>{{ humanize .Title }}</title>
+    {{ else }}
+    <title>{{ humanize .Site.Title }} - {{ .Title }} </title>
+    {{ end }}
+
     {{ if .Site.Params.favicon }}
     <link rel="icon" href="{{ .Site.Params.favicon | absURL }}">
     {{ end }}
