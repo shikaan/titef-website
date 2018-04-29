@@ -1,31 +1,47 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
 
-{{ partial "head" . }} 
-
-{{ if .Site.Params.MathJax | default true }}
-<!-- adds MathJax support -->
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script> 
-{{ end }}
+{{ partial "head" . }}
 
 <body>
     {{ partial "nav" . }}
-    <main>
-        <div class="intro">
-            <div class="intro__row">
+    <main class="container">
+        <section class="intro">
+            <div class="intro__row intro__row--right">
                 {{ with .Site.Params.profilePic }}
                 <img class="intro__profile" src="{{ . }}">
                 {{ end }}
             </div>
-            <div class="intro__row">
+            <div class="intro__row intro__row--left">
                 <div class="intro__text">
                     <h1 class="intro__title">{{ .Site.Title }}</h1>
 
                     <h2 class="intro__description">{{ markdownify .Site.Params.Description }}</h2>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <section class="featured">
+            <div class="row">
+                {{ $features := where .Site.Pages "Section" "features" }}
+                {{ range sort $features }}
+                    {{ if ne .Title "Features" }}
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="card" onClick="window.location.href = {{ .Params.ReadMoreUrl }}">
+                                <i class="card__icon">{{ .Params.Icon }}</i>
+                                <h3 class="card_title">{{ .Title }}</h3>
+                                <p class="card_description">
+                                    {{ markdownify .Content }}
+                                </p>
+                                <a class="card__read-more" href="{{ .Params.ReadMoreUrl }}">
+                                    Read more
+                                </a>
+                            </div>
+                        </div>
+                    {{ end }}
+                {{ end }}
+            </div>
+        </section>
     </main>
 
     {{ partial "footer" . }}

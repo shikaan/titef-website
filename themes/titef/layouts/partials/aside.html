@@ -1,3 +1,4 @@
+{{ if ne .Params.HideSectionNavigator true}}
 {{ $sectionPages := where .Site.Pages "Section" .Section }}
 
 <div class="navigator">
@@ -18,3 +19,4 @@
     </section>
     {{ end }}
 </div>
+{{ end }}

@@ -33,6 +33,7 @@ Where the `options` object is shaped this way
 
 | Attribute 	| Type       | Description                                 |
 |-----------	|----------- |-------------------------------------------- |
+| silent     	| `Boolean`  | Exclude the suite from reporters            |
 | setup     	| `Function` | What should happen _before_ the suite runs? |
 | teardown   	| `Function` | What should happen _after_ the suite runs?  |
 | eachSetup     | `Function` | What should happen _before each spec_ runs? |
