@@ -2,7 +2,7 @@ baseURL = "http://example.com/"
 languageCode = "en"
 title = "titef"
 theme = "titef"
-googleAnalytics = ""
+googleAnalytics = "UA-112407506-1"
 
 [params]
     locale = "en_US"
