@@ -11,18 +11,33 @@ $logo-height: 454px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin: $size-12;
 
   .intro__row {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 100%;
+    margin: auto;
+
+    @media (min-width: map-get($grid-breakpoints, 'sm')) {
+      flex: 1;
+    }
+
+    &--right {
+      align-items: flex-end;
+    }
+
+    &--left {
+      align-items: flex-start;
+    }
 
     .intro__profile {
-      width: $logo-width / 2;
-      height: $logo-height / 2;
       border-radius: 0;
-      margin: $gutter-size auto;
+      margin: $gutter-size 0;
+
+      @media (min-width: map-get($grid-breakpoints, 'sm')) {
+        height: 30vh;
+      }
     }
 
     .intro__text {
@@ -47,7 +62,46 @@ $logo-height: 454px;
       }
     }
   }
+}
 
+.featured {
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    > * {
+      display: flex;
+    }
+
+    .card {
+      border-radius: $size-1;
+      color: $dark;
+      padding: $size-4;
+      margin: $size-4 0;
+      box-shadow: 0 $size-1/2 $size-2 rgba(0, 0, 0, 0.18);
+      background: $gray-100;
+
+      .card__icon {
+        font-size: $size-14;
+        font-style: normal;
+      }
+
+      .card_title {
+        margin: $size-1
+      }
+
+      .card_description {
+        color: $gray-300;
+      }
+
+      .card_description,
+      .card__read-more {
+        font-weight: 100;
+      }
+    }
+
+  }
 }
 
 @media (min-width: map-get($grid-breakpoints, 'sm')) {
