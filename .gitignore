@@ -2,6 +2,7 @@
 node_modules
 
 theme/*/node_modules
+public
 
 **/*/css/_style.css
 **/*/css/style.css
