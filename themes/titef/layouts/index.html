@@ -27,13 +27,13 @@
                 {{ range sort $features }}
                     {{ if ne .Title "Features" }}
                         <div class="col-xs-12 col-sm-4">
-                            <div class="card" onClick="window.location.href = {{ .Params.ReadMoreUrl }}">
+                            <div class="card" onClick="window.location.href = {{ .Params.ReadMoreUrl | relURL }}">
                                 <i class="card__icon">{{ .Params.Icon }}</i>
                                 <h3 class="card_title">{{ .Title }}</h3>
                                 <p class="card_description">
                                     {{ markdownify .Content }}
                                 </p>
-                                <a class="card__read-more" href="{{ .Params.ReadMoreUrl }}">
+                                <a class="card__read-more" href="{{ .Params.ReadMoreUrl | relURL }}">
                                     Read more
                                 </a>
                             </div>

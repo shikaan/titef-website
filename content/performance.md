@@ -7,57 +7,69 @@ So you cannot believe how fast and light Titef can be, right?
 
 Well, brace yourself.
 
+> **DISCLAIMER**
+>
+> This has slightly changed since last release. The reasons 
+> behind such change are:
+>
+> 1. `perf_hooks` is no longer working the same in Node 10, so
+     we adopted a version-agnostic support, using `hrtime`;
+>
+> 2. there was a small bug in the `Statistics` class;
+
 # Performance test
 
 The following test is really straightforward: without testing
-assertion (because both Mocha and Jest don't have a builtin 
+assertion (because both Mocha and Titef don't have a builtin 
 assertion library) and without testing any implementation 
 related thing, we created a huge array and tried to filter it
 and sort it in the specifications of the test.
 
-To give metrics on the performance we created a `Statistics`
-class which is supposed to calculate the size of the sample,
-giving us a couple of basic metrics such as _Average_ and 
-_Standard deviation_.
-
-The data we used to feed this class is gathered by Node's
-`perf_hooks`.
+Then we measured, using `process.hrtime`, how log did it take 
+to run the whole test.
 
 ## Code
 
 This is the code of the test we ran
 
 ```
-const { Statistics, array, print } = require('./fixtures');
-const { performance } = require('perf_hooks');
+// Mocha, Jest, Titef
+const { array } = require('./fixtures');
 
-performance.mark('Init');
 describe('benchmark', () => {
   it('with filter', () => {
-    const stats = new Statistics();
-
     for (let i = 0; i <= 1000; i += 1) {
       array.filter(j => j % 2);
-      performance.mark('End');
-      performance.measure('Duration', 'Init', 'End');
-
-      stats.sample.push(performance.getEntriesByName('Duration')[0].duration);
     }
-    // print results
   });
 
   it('with sort', () => {
-    const stats = new Statistics();
-
     for (let i = 0; i <= 1000; i += 1) {
       array.sort();
-      performance.mark('End');
-      performance.measure('Duration', 'Init', 'End');
-
-      stats.sample.push(performance.getEntriesByName('Duration')[0].duration);
     }
-    // print results
   });
+});
+```
+
+```
+// Ava
+const test = require('ava');
+const { array } = require('./fixtures');
+
+test('with filter', (t) => {
+  for (let i = 0; i <= 1000; i += 1) {
+    array.filter(j => j % 2);
+  }
+
+  t.pass();
+});
+
+test('with sort', (t) => {
+  for (let i = 0; i <= 1000; i += 1) {
+    array.sort();
+  }
+
+  t.pass();
 });
 ```
 
@@ -66,16 +78,28 @@ describe('benchmark', () => {
 This is the script we used to run the same test on all the frameworks
 
 ```
-#! /bin/bash
+const { execSync } = require('child_process');
+const { print, toMilliseconds } = require('./fixtures');
 
-echo "Mocha"
-npx mocha -t 100000 --reporter min ./test/performance/specs.js
+print('  Mocha');
+const mochaMark = process.hrtime();
+execSync('mocha -t 100000 --reporter min ./test/performance/spec.js');
+print(`    Duration: ${toMilliseconds(process.hrtime(mochaMark))} ms`);
 
-echo "Jest"
-npx jest --testPathPattern=performance --reporters jest-silent-reporter
+print('  Jest');
+const jestMark = process.hrtime();
+execSync('jest --testPathPattern=performance --reporters jest-silent-reporter');
+print(`    Duration: ${toMilliseconds(process.hrtime(jestMark))} ms`);
 
-echo "Titef"
-npx titef ./test/performance/specs.js
+print('  Ava');
+const avaMark = process.hrtime();
+execSync('ava ./test/performance/ava.js');
+print(`    Duration: ${toMilliseconds(process.hrtime(avaMark))} ms`);
+
+print('  Titef');
+const titefMark = process.hrtime();
+execSync('titef ./test/performance/spec.js');
+print(`    Duration: ${toMilliseconds(process.hrtime(titefMark))} ms`);
 ```
 
 ## Result
