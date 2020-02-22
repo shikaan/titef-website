@@ -7,8 +7,8 @@ weight: 1
 boring, thus we needed to make it as *easy* and as *fast* as possible.
 
 To make this true we built this collection of recipes meant to be a 
-vademecum for developers: most probably after two or three times you 
-get the logic behind it and you won't need this anymore.
+vademecum for developers: hopefully after a couple of times you won't 
+need to read any longer.
 
 # Assumptions
 _Recipes assume_ the following basic knowledge:
