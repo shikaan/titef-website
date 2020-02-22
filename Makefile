@@ -16,4 +16,4 @@ build: build_theme
 develop: build_theme
 	hugo server
 
-PHONY: check,install,build
+PHONY: check_system_dependencies,install_theme_dependencies,build_theme,build,develop
