@@ -60,7 +60,7 @@ suite('AsyncNode', () => {
             await promisified('not even a path', 'utf-8')
         };
 
-        await assert.throwsAsync(fn, Error);
+        await assert.rejects(fn, Error);
     })
 })
 
