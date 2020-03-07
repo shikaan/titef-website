@@ -54,8 +54,8 @@ suite('SumAsync', () => {
             await asyncSum('foo', 2);
         }
 
-        // And remember to use `throwsAsync` instead of `throws`, here
-        await assert.throwsAsync(fn, /First argument is not number/);
+        // And remember to use `rejects` instead of `throws`, here
+        await assert.rejects(fn, /First argument is not number/);
     })
 
     xspec('ignored', () => {
@@ -71,14 +71,9 @@ To launch the test you need to
 $ titef test/sum-async.specs.js
 ```
 
-
-> ## Remark
-> **Titef** adds two methods to the otherwise awesome `assert` library. These are namely `throwsAsync` and `doesNotThrowAsync`.
-> This means that if you want to use such methods, you can only run test via CLI.
-
 # Test (without CLI)
 
-Guess what? You don't need to use our CLI (unless you want special goodies, read [above remark](#remark))
+Guess what? You don't need to use our CLI
 
 ```javascript
 // test/sum-async.specs.js

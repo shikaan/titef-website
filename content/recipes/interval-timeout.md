@@ -38,7 +38,7 @@ suite('AsyncTimeout', () => {
             }, 1000);
         }
 
-        await assert.throwsAsync(fn, Error);
+        await assert.rejects(fn, Error);
     })
 })
 ```
