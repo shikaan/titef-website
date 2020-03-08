@@ -18,7 +18,12 @@
       padding: $size-2 $size-4;
 
       a {
-        font-weight: 100;
+        @media only screen and (max-device-pixel-ratio: 2) {
+          & {
+            font-weight: 100;
+          }
+        }
+
         color: $gray-300;
 
         &:hover {

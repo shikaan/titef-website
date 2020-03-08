@@ -95,9 +95,11 @@ $logo-height: 454px;
         color: $gray-300;
       }
 
-      .card_description,
-      .card__read-more {
-        font-weight: 100;
+      @media only screen and (max-device-pixel-ratio: 2) {
+        .card_description,
+        .card__read-more {
+          font-weight: 100;
+        }
       }
     }
 

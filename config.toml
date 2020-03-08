@@ -13,10 +13,14 @@ googleAnalytics = "UA-112407506-1"
     highlight = true
     highlightStyle = "github"
     highlightLanguages = ["javascript"]
+    highlightVersion = "9.18.1"
 	profilePic = "./images/logo.png"
 	favicon = "./images/favicon.ico"
 	headingFont = "Josefin Sans"
 	font = "Lato"
+
+[markup.goldmark.renderer]
+    unsafe = true
 
 [[menu.main]]
     url = "/"
