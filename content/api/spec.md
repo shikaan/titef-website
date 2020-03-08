@@ -38,6 +38,50 @@ careful though: once you use the `async` keyword make sure your specs
 are independent before going for an `async` flow, because they will
 run concurrently and can potentially lead to unexpected results.
 
+This namely means that `eachSetup` and `eachTeardown` callbacks are still
+executed before and after each `spec`, but there is no guarantee that - 
+when running more than one `spec` - the order of said callbacks matches 
+the order of the `spec`s.
+
+For example, the following snippet
+```javascript
+suite('suite', {
+  eachSetup() {
+    console.log('setup')  
+  },
+  eachTeardown() {
+    console.log('teardown')
+  }
+}, async () => {
+  spec('spec1', async () => {
+    console.log('spec1');
+  });
+  spec('spec2', async () => {
+    console.log('spec2');
+  })
+})
+```
+might yield the following outputs
+```
+setup
+spec1
+teardown
+setup
+spec2
+teardown
+```
+```
+setup
+spec1
+setup
+spec2
+teardown
+teardown
+```
+
+As you can see the order setup/spec/teardown is preserved for each spec, 
+but it's not preserved across different specs. 
+
 If you're not interested in the order of execution of the specs and 
 you just care for the order of reporting, you can sleep tight: 
 **Titef** will always report result in the same order as the specs 
